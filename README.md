@@ -1,1 +1,1 @@
-![Alt](./architecture.svg)
+![architecture schema](./architecture.svg)
