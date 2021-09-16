@@ -7,16 +7,8 @@ nav:
     - Architecture: explanation.md
     - Internals:
       - Getting Started: gettingstarted.md
+      - Utils: utils.md
       - Metadata & Indexes: metadata.md
-      - Decoding: decoding.md
-      - Desktop Usage: desktop.md
-      - How It Works: howitworks.md
-      - Multinode: multinode.md
-      - Sharding: sharding.md
-      - Sources: sources.md
-      - Writing: writing.md
-      - Video Loading: video-loading-example.md
-    - Dataset Conversions:
-      - Falling Things: convert-falling-things.md
-      - Objectron: convert-objectron.md
+    - Informations:
+      - Patch Notes: patch-notes.md
 theme: readthedocs

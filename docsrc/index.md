@@ -9,7 +9,7 @@
 
 Yardb is a file management system based on a dbms architecture to perform its operations. It uses sql language but contains support for other data types. The project was created for study purposes and should not be used in production. Its future additions should support .tar files and native time series operations.
 
-## Installation
+## Installation (Not Working Yet)
 
 You can install the yardb with pip:
 
