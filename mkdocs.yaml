@@ -1,6 +1,6 @@
 site_name: yardb
 repo_url: http://github.com/jose-gilberto/yardb
-docs_dir: docs
+docs_dir: docsrc
 site_dir: docs
 nav:
     - Home: index.md

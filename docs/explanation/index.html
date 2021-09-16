@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Architecture - yardb</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Architecture";
+    var mkdocs_page_input_path = "explanation.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> yardb</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Architecture</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#query-query-manager">Query (Query Manager)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#query-parser">Query Parser</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#query-optimizer">Query Optimizer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#query-planner">Query Planner</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#indexes">Indexes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#storage-manager">Storage Manager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#file-manager">File Manager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#memory-manager">Memory Manager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#buffer">Buffer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data">Data</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#transaction-manager">Transaction Manager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#concurrency-control">Concurrency Control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#recovery-manager">Recovery Manager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logs">.logs</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#executor">Executor</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Internals</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../gettingstarted.md">Getting Started</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../metadata/">Metadata & Indexes</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../decoding.md">Decoding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../desktop.md">Desktop Usage</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../howitworks.md">How It Works</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../multinode.md">Multinode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../sharding.md">Sharding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../sources.md">Sources</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../writing.md">Writing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../video-loading-example.md">Video Loading</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Dataset Conversions</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="" href="../convert-falling-things.md">Falling Things</a>
+                    </li>
+                    <li class="toctree-l1"><a class="" href="../convert-objectron.md">Objectron</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">yardb</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Architecture</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="http://github.com/jose-gilberto/yardb/edit/master/docs/explanation.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="architecture">Architecture</h2>
+<p>The project will be builded on top of the following architecture of a dbms:</p>
+<p><img alt="arch" src="https://raw.githubusercontent.com/jose-gilberto/yardb/main/architecture.svg" /></p>
+<p>Explaining each part separately.</p>
+<h3 id="query-query-manager">Query (Query Manager)</h3>
+<p>Manages queries based on a subset of SQL. Some new commands implemented while others were removed to make building the base easier. All grammar can be found in this <a href="">link</a>.</p>
+<h4 id="query-parser">Query Parser</h4>
+<p>Do the compiler functions on top of each statement. Following this sequence:<br />
+- Tokenize (Lexer)<br />
+- Parser (Parser)<br />
+- Sematic analyzer<br />
+- AST build  </p>
+<h4 id="query-optimizer">Query Optimizer</h4>
+<p>Run an optimization on top of an AST, making the changes based on relational algebra functions like projection and others functions.</p>
+<h4 id="query-planner">Query Planner</h4>
+<p>Do the execution plan based on the AST generated before, using a set of algorithms builded internally on the yardb.</p>
+<hr />
+<h3 id="metadata">Metadata</h3>
+<p>Contains information relating to tables, columns, schemas, and other types of data relating to the stores used internally by yardb.</p>
+<h3 id="indexes">Indexes</h3>
+<hr />
+<h3 id="storage-manager">Storage Manager</h3>
+<h4 id="file-manager">File Manager</h4>
+<h4 id="memory-manager">Memory Manager</h4>
+<h4 id="buffer">Buffer</h4>
+<h4 id="data">Data</h4>
+<hr />
+<h3 id="transaction-manager">Transaction Manager</h3>
+<h4 id="concurrency-control">Concurrency Control</h4>
+<h4 id="recovery-manager">Recovery Manager</h4>
+<h4 id="logs">.logs</h4>
+<hr />
+<h3 id="executor">Executor</h3>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../metadata/" class="btn btn-neutral float-right" title="Metadata & Indexes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="http://github.com/jose-gilberto/yardb/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../metadata/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
