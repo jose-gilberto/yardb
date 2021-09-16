@@ -2,7 +2,7 @@
 # Yardb
 
 ![license](https://img.shields.io/static/v1?label=license&message=MIT&color=informational&style=for-the-badge)
-![version](https://img.shields.io/static/v1?label=version&message=0.0.1&color=informational&style=for-the-badge)
+![version](https://img.shields.io/static/v1?label=version&message=0.0.1b&color=informational&style=for-the-badge)
 ![issues](https://img.shields.io/github/issues/jose-gilberto/yardb?style=for-the-badge)
 
 ## About
