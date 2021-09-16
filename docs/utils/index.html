@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Metadata & Indexes - yardb</title>
+  <title>Utils - yardb</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Metadata & Indexes";
-    var mkdocs_page_input_path = "metadata.md";
+    var mkdocs_page_name = "Utils";
+    var mkdocs_page_input_path = "utils.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -58,19 +58,21 @@
                 <ul class="current">
                     <li class="toctree-l1"><a class="" href="../gettingstarted.md">Getting Started</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../utils/">Utils</a>
-                    </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Metadata & Indexes</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Utils</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#metadata">Metadata</a>
+    <li class="toctree-l2"><a class="reference internal" href="#cli-interface">CLI Interface</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#information_schema">information_schema</a>
+    <li class="toctree-l3"><a class="reference internal" href="#overall-statements">Overall Statements</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#information_schema_column">information_schema_column</a>
+    <li class="toctree-l3"><a class="reference internal" href="#sql-statements">SQL Statements</a>
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sktinterface-socket-interface">SktInterface (Socket Interface)</a>
+    </li>
     </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../metadata/">Metadata & Indexes</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Informations</span></p>
@@ -103,10 +105,10 @@
         
       
     
-    <li>Metadata & Indexes</li>
+    <li>Utils</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="http://github.com/jose-gilberto/yardb/edit/master/docs/metadata.md"
+        <a href="http://github.com/jose-gilberto/yardb/edit/master/docs/utils.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -118,143 +120,51 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="metadata-indexes">Metadata &amp; Indexes</h1>
-<h2 id="metadata">Metadata</h2>
-<p>In a simple definition, metadata is considered by yardb to be all data relating to the inner workings of the dbms. That is, data relating to your stored data. Such as, for example: data relating to tables that exist in the schema or the columns of a table with their types and sizes in bytes.</p>
-<p>Basically the metadata is found in 3 static structure tables: <code>information_schema</code>, <code>information_schema_column</code> and <code>information_schema_catalog</code>.</p>
-<p>The last name is momentarily reserved for structures that will be created in other versions.</p>
-<hr />
-<h3 id="information_schema"><code>information_schema</code></h3>
-<p>Contains table data divided into two columns: table_name and schema. The schema for now will always be public, later it will allow the creation of more schemas to store the tables.</p>
-<table>
-<thead>
-<tr>
-<th>column</th>
-<th>size (bytes)</th>
-<th>type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>table_name</td>
-<td>255 bytes</td>
-<td>varchar</td>
-</tr>
-<tr>
-<td>schema</td>
-<td>255 bytes</td>
-<td>varchar</td>
-</tr>
-</tbody>
-</table>
-<p>It can be organized in heap pages as follows:</p>
-<table>
-    <tr>
-        <td>pd_lower (16b) </td>
-        <td>pd_upper (16b) </td>
-        <td>pointer_1 (16b)</td>
-        <td>pointer_2 (16b)</td>
-    </tr>
-    <tr>
-        <td colspan=4 align=center> empty space </td>
-    </tr>
-    <tr>
-        <td colspan=4 align=center> empty space </td>
-    </tr>
-    <tr>
-        <td colspan=2 align=center>
-            <table>
-                row_2 (255b+255b)
-                <tr>
-                    <td>table_name_2 (255b)</td>
-                    <td>schema_2 (255b)</td>
-                </tr>
-            </table>
-        </td>
-        <td colspan=2 align=center>
-            <table>
-                row_1 (255b+255b)
-                <tr>
-                    <td>table_name_1 (255b)</td>
-                    <td>schema_1 (255b)</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+                <h1 id="utils">Utils</h1>
+<h2 id="cli-interface">CLI Interface</h2>
+<p>The command line interface is responsible for starting a class that receives the sql statements to be executed by dbms. An example implementation would be as follows:</p>
+<pre><code class="language-python">
+class CLIInterface:
 
-<h3 id="information_schema_column"><code>information_schema_column</code></h3>
-<p>Contains data relating to the columns of each table, which can be divided as follows:</p>
+    @staticmethod
+    def run():
+        while True:
+            # Do the processing of information
+            # Calls DBMS passing the query
+            ...
+
+</code></pre>
+<p>The loop runs until an exit command is entered by the user. Possible commands are:</p>
+<ul>
+<li><code>.exit</code></li>
+<li><code>.tables</code></li>
+</ul>
+<p>All commands are started with a <code>.</code> followed by the statement.</p>
+<h3 id="overall-statements">Overall Statements</h3>
+<p>These are commands that start with a period, these commands are executed without going through the normal processes of reading an SQL command. That is, they start and are processed by custom and static pipes. They can be used regardless of the database file structure.</p>
 <table>
 <thead>
 <tr>
-<th>columns</th>
-<th>size (bytes)</th>
-<th>type</th>
+<th>command</th>
+<th>explanation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>table_name</td>
-<td>255</td>
-<td>varchar</td>
+<td><code>.exit</code></td>
+<td>Calls a exit, breaking the loop and closing the connection with the yardb.</td>
 </tr>
 <tr>
-<td>column_name</td>
-<td>255</td>
-<td>varchar</td>
-</tr>
-<tr>
-<td>nullable</td>
-<td>1</td>
-<td>boolean</td>
-</tr>
-<tr>
-<td>data_type</td>
-<td>16</td>
-<td>int</td>
-</tr>
-<tr>
-<td>length</td>
-<td>16</td>
-<td>int</td>
+<td><code>.tables</code></td>
+<td>Shows all the existing tables in this database.</td>
 </tr>
 </tbody>
 </table>
-<p>It can be organized in heap pages as follows:</p>
-<table>
-    <tr>
-        <td>pd_lower (16b) </td>
-        <td>pd_upper (16b) </td>
-        <td>pointer_1 (16b)</td>
-        <td> empty space </td>
-    </tr>
-    <tr>
-        <td colspan=4 align=center> empty space </td>
-    </tr>
-    <tr>
-        <td colspan=4 align=center> empty space </td>
-    </tr>
-    <tr>
-        <td colspan=1 align=center>
-            empty space
-        </td>
-        <td colspan=3 align=center>
-            <table>
-                row_1 (255b+255b)
-                <tr>
-                    <td>table_name_1 (255b)</td>
-                    <td>column_name_1 (255b)</td>
-                    <td>nullable (1b)</td>
-                </tr>
-                <tr>
-                    <td>data_type (16b)</td>
-                    <td>length (16b)</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+<p>In the future, new commands can be created and added to this list.</p>
+<h3 id="sql-statements">SQL Statements</h3>
+<p>Only in v0.2+.</p>
+<h2 id="sktinterface-socket-interface">SktInterface (Socket Interface)</h2>
+<p>Only in v0.5+.</p>
               
             </div>
           </div>
@@ -262,10 +172,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../patch-notes/" class="btn btn-neutral float-right" title="Patch Notes">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../metadata/" class="btn btn-neutral float-right" title="Metadata & Indexes">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../utils/" class="btn btn-neutral" title="Utils"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../explanation/" class="btn btn-neutral" title="Architecture"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -295,10 +205,10 @@
         </span>
     
     
-      <span><a href="../utils/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../explanation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../patch-notes/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../metadata/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
