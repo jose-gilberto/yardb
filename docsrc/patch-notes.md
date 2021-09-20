@@ -11,7 +11,7 @@ About tasks:
 - ⭕ Not implemented
 - ✖️ Cancelled
 
-## v0.0.1
+## v0.0.1 🚀
 
-- CLI Interface ⭕
-- Overall Statements Support ⭕
+- CLI Interface ✔️
+- Overall Statements Support ✔️
