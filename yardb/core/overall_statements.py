@@ -7,7 +7,7 @@ class Command(ABC):
     """
 
     @abstractmethod
-    def execute() -> None:
+    def execute(self) -> None:
         pass
 
 
