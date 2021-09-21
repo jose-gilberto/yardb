@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+from yardb import __version__
 
 class Command(ABC):
     """
@@ -35,3 +35,15 @@ class TableListCommand(Command):
 
     def execute(self) -> None:
         print(f'Listing all tables from {self.database}.')
+
+
+class VersionCommand(Command):
+    """
+    Command to view the actual version of the yardb dbms.
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+
+    def execute(self) -> None:
+        print(f'Yardb version: {__version__}.')
