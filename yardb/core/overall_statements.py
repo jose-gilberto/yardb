@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
+from genericpath import isdir
 from yardb import __version__
+from .startup import YardbFolderSystem
+import os
 
 class Command(ABC):
     """
@@ -47,3 +50,19 @@ class VersionCommand(Command):
 
     def execute(self) -> None:
         print(f'Yardb version: {__version__}.')
+
+
+class DatabaseListCommand(Command):
+    """
+    Command to list all the databases in this cluster.
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+    
+    def execute(self) -> None:
+        path = os.path.join(YardbFolderSystem.ROOT_PATH, 'base')
+        databases_list = [name for name in os.listdir(path) if os.path.isdir(os.path.join(path, name))]
+        print('Avaliable databases:')
+        for db in databases_list:
+            print(f'>>>\t{db}')

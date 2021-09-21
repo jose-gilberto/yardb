@@ -1,9 +1,10 @@
-from .overall_statements import TableListCommand, ExitCommand, VersionCommand
+from .overall_statements import DatabaseListCommand, TableListCommand, ExitCommand, VersionCommand
 
 overall_statements = {
     '.exit': ExitCommand().execute,
     '.tables': TableListCommand().execute,
-    '.version': VersionCommand().execute
+    '.version': VersionCommand().execute,
+    '.databases': DatabaseListCommand().execute
 }
 
 
