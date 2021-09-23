@@ -24,3 +24,9 @@ About tasks:
     - Databases in this cluster ✔️
     - Create tables, views and indexes folders ✔️
     - Preserve the state of the cluster after shutdown ✔️
+
+## v0.0.3
+
+- Query parser ⭕
+    - Basic DDL ⭕
+    - Basic DQL ⭕
