@@ -16,11 +16,11 @@ About tasks:
 - CLI Interface ✔️
 - Overall Statements Support ✔️
 
-## v0.0.2
+## v0.0.2 🚀
 
-- Startup class configuring the root folder ⭕
-- Save informations like: ⭕
-    - Database version
-    - Databases in this cluster
-    - Create tables, views and indexes folders
-    - Preserve the state of the cluster after shutdown
+- Startup class configuring the root folder ✔️
+- Save informations like: ✔️
+    - Database version ✔️
+    - Databases in this cluster ✔️
+    - Create tables, views and indexes folders ✔️
+    - Preserve the state of the cluster after shutdown ✔️
